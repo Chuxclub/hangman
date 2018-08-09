@@ -3,4 +3,4 @@ project(hangman)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(hangman main.cpp cmake-build-debug/std_lib_facilities.h)
+add_executable(hangman main.cpp std_lib_facilities.h)

@@ -4,57 +4,93 @@
 string word_picker();
 //Return random picked word
 
-string word_concealer(string picked);
+string word_concealer(string const& picked);
 //Conceals random picked word
 
-vector <size_t> occurrence_finder(string picked, string guess);
+vector <size_t> occurrence_finder(string const& picked, string const& guess);
 //Compares user char with chars in picked word
 //Returns a vector with the positions of chars in string
-
-/*string word_revealer(vector <size_t> a, string concealed, string guess);*/
 
 
 /* ---------------------------------------------- HANGMAN GAME SOLO ---------------------------------------------- */
 
 int main()
 {
-    bool won = false;
+    bool won = false, lost = false;
+    int tries = 0;
+    const int MAX_TRIES = 5;
 
-    string picked_word = word_picker();
-
-    string concealed_word = word_concealer(picked_word);
-    cout << concealed_word << "\n\n";
-
-    std::cout << "Pick a letter: ";
     string user_letter_guess;
+    string picked_word = word_picker();
+    string concealed_word = word_concealer(picked_word);
 
-    while(!won)
+    vector <size_t> occurrence_pos;
+    vector <string> wrong_guesses;
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~ If user has neither won nor lost, then loops ~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+    while(!won && !lost) //If player has won, condition is false, same goes if he has lost
     {
+        std::cout << concealed_word << "\n\n";
+
+        std::cout << "Pick a letter: ";
         std::cin >> user_letter_guess;
         std::cout << "\n";
 
-        vector <size_t> occurrence_pos = occurrence_finder(picked_word, user_letter_guess);
+        occurrence_pos = occurrence_finder(picked_word, user_letter_guess);
 
-        for(size_t x : occurrence_pos)
-            concealed_word.replace(x, 1, user_letter_guess);
-
-        cout << concealed_word << "\n\n";
-
-        for (char x : concealed_word)
+        if (occurrence_pos.empty()) //Tests if occurrences of user's guessed letter have been found
         {
-            if(x == '*')
-            {
-                won = false;
-                std::cout << "Pick a letter: ";
-                break;
-            }
+            wrong_guesses.push_back(user_letter_guess);
+            tries++;
 
-            won = true;
+            std::cout << "Wrong letters: " ;
+
+            for (string const& x : wrong_guesses)
+                std::cout << x << ", ";
+
+            std::cout << "\n\n";
+        }
+
+        else
+        {
+            for(size_t x : occurrence_pos)
+                concealed_word.replace(x, 1, user_letter_guess); //Reveals found letters
+        }
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~ Tests whether the user has won or lost ~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+        switch(tries)
+        {
+            case MAX_TRIES:
+                lost = true;
+                break;
+
+            default:
+
+                for (char x : concealed_word)
+                {
+                    if(x == '*')
+                    {
+                        won = false;
+                        break;
+                    }
+
+                    won = true;
+                }
+
+                break;
         }
     }
 
-    std::cout << "You won!";
-    std::cout << "\n";
+// ~~~~~~~~~~~~~~~~~~~~~~~~~ If player has either won or lost, loop ends ~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+    if(won)
+        std::cout << "YOU WON!" << "\n\n" << "The hidden word is indeed: " << picked_word << " !" << "\n";
+
+    else
+        std::cout << "YOU LOST!" << "\n\n" << "The hidden word was: " << picked_word << " !" << "\n";
 
     return 0;
 }
@@ -82,7 +118,7 @@ string word_picker()
 }
 
 
-string word_concealer(string picked)
+string word_concealer(string const& picked)
 {
     std::string concealed_word;
 
@@ -92,37 +128,18 @@ string word_concealer(string picked)
     return concealed_word;
 }
 
-vector <size_t> occurrence_finder(string picked, string guess)
+vector <size_t> occurrence_finder(string const& picked, string const& guess)
 {
-    vector <size_t> founds_vec;
     size_t found = picked.find(guess);
+    vector <size_t> founds_vec;
 
-    if (found == std::string::npos)
-        std::cout << "Try again!" << "\n\n";
-
-    else
+    while(found != std::string::npos)
     {
-        while(found != std::string::npos)
-        {
-            founds_vec.push_back(found);
-            found = picked.find(guess, found + 1);
-        }
+        founds_vec.push_back(found);
+        found = picked.find(guess, found + 1);
     }
 
     return founds_vec;
 }
 
-/*string word_revealer(vector <size_t> a, string concealed, string guess)
-{
-    for(size_t x : a)
-        concealed.replace(x, 1, guess);
-
-    return concealed;
-}*/
-
-
 //std::cout << picked_word << "\n\n";
-//concealed.replace(x, 1, guess);
-//concealed.erase(x, 1);
-//concealed.insert(x, guess);
-//string revealing_word;

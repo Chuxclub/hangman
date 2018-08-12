@@ -1,16 +1,6 @@
 #include <iostream>
 #include "std_lib_facilities.h"
-
-string word_picker();
-//Return random picked word
-
-string word_concealer(string const& picked);
-//Conceals random picked word
-
-vector <size_t> occurrence_finder(string const& picked, string const& guess);
-//Compares user char with chars in picked word
-//Returns a vector with the positions of chars in string
-
+#include "hangman_func.h"
 
 /* ---------------------------------------------- HANGMAN GAME SOLO ---------------------------------------------- */
 
@@ -19,14 +9,16 @@ int main()
     bool won = false, lost = false;
     int tries = 0;
     const int MAX_TRIES = 5;
-
-    string user_letter_guess;
-    string picked_word = word_picker();
-    string concealed_word = word_concealer(picked_word);
-
+    constexpr char HIDING_CHAR = '*';
+    std::string user_letter_guess;
     vector <size_t> occurrence_pos;
     vector <string> wrong_guesses;
 
+
+    std::string picked_word = word_picker(); //Randomly picks a word and assigns it to variable picked_word
+    std::string concealed_word = word_concealer(picked_word, HIDING_CHAR); //Returns a string of * which equals length of picked_word
+
+    std::cout << picked_word << "\n\n";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~ If user has neither won nor lost, then loops ~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
@@ -43,21 +35,12 @@ int main()
         if (occurrence_pos.empty()) //Tests if occurrences of user's guessed letter have been found
         {
             wrong_guesses.push_back(user_letter_guess);
+            print_wrong_guesses(wrong_guesses);
             tries++;
-
-            std::cout << "Wrong letters: " ;
-
-            for (string const& x : wrong_guesses)
-                std::cout << x << ", ";
-
-            std::cout << "\n\n";
         }
 
         else
-        {
-            for(size_t x : occurrence_pos)
-                concealed_word.replace(x, 1, user_letter_guess); //Reveals found letters
-        }
+            letter_revealer(occurrence_pos, concealed_word, user_letter_guess);
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~ Tests whether the user has won or lost ~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
@@ -68,18 +51,7 @@ int main()
                 break;
 
             default:
-
-                for (char x : concealed_word)
-                {
-                    if(x == '*')
-                    {
-                        won = false;
-                        break;
-                    }
-
-                    won = true;
-                }
-
+                won = win_checker(concealed_word, HIDING_CHAR);
                 break;
         }
     }
@@ -96,50 +68,5 @@ int main()
 }
 
 /* ---------------------------------------------------------------------------------------------------------------- */
-
-
-string word_picker()
-{
-    vector<string> dictionary;
-    fstream file("/home/crex/CLionProjects/hangman/words_alpha.txt"); //Warning! Works only on this environment!
-    std::string words;
-
-    while(file >> words)
-    {
-        dictionary.push_back(words);
-    }
-
-    srand((unsigned int) time(nullptr));
-    constexpr int TOTAL_OF_WORDS = 370099;
-    int x = rand()%TOTAL_OF_WORDS;
-    std::string picked_word = dictionary[x];
-
-    return picked_word;
-}
-
-
-string word_concealer(string const& picked)
-{
-    std::string concealed_word;
-
-    for(int i = 0; i < picked.length(); i++)
-        concealed_word.push_back('*'); //Temporary solution to not bother with blank spaces
-
-    return concealed_word;
-}
-
-vector <size_t> occurrence_finder(string const& picked, string const& guess)
-{
-    size_t found = picked.find(guess);
-    vector <size_t> founds_vec;
-
-    while(found != std::string::npos)
-    {
-        founds_vec.push_back(found);
-        found = picked.find(guess, found + 1);
-    }
-
-    return founds_vec;
-}
 
 //std::cout << picked_word << "\n\n";

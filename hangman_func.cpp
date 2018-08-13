@@ -27,7 +27,7 @@ string word_picker()
 }
 
 
-string word_concealer(string const& picked, char HIDING_CHAR)
+string conceal(string const& picked, char HIDING_CHAR)
 {
     std::string concealed_word;
 
@@ -61,7 +61,7 @@ void print_wrong_guesses(vector <string> const& wrong_guesses)
     std::cout << "\n\n";
 }
 
-string letter_revealer (vector <size_t> const& occurrence, string &concealed, string const& guess)
+string reveal(string &concealed, string const& guess, vector <size_t> const& occurrence)
 {
     for(size_t x : occurrence)
         concealed.replace(x, 1, guess);
@@ -69,7 +69,7 @@ string letter_revealer (vector <size_t> const& occurrence, string &concealed, st
     return concealed;
 }
 
-bool win_checker(string const& concealed, char HIDING_CHAR)
+bool check(string const& concealed, char HIDING_CHAR)
 {
     for (char x : concealed)
     {

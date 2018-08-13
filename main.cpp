@@ -10,13 +10,13 @@ int main()
     int tries = 0;
     const int MAX_TRIES = 5;
     constexpr char HIDING_CHAR = '*';
-    std::string user_letter_guess;
+    std::string user_guess;
     vector <size_t> occurrence_pos;
     vector <string> wrong_guesses;
 
 
     std::string picked_word = word_picker(); //Randomly picks a word and assigns it to variable picked_word
-    std::string concealed_word = word_concealer(picked_word, HIDING_CHAR); //Returns a string of * which equals length of picked_word
+    std::string concealed_word = conceal(picked_word, HIDING_CHAR); //Returns a string of * which equals length of picked_word
 
     std::cout << picked_word << "\n\n";
 
@@ -27,20 +27,20 @@ int main()
         std::cout << concealed_word << "\n\n";
 
         std::cout << "Pick a letter: ";
-        std::cin >> user_letter_guess;
+        std::cin >> user_guess;
         std::cout << "\n";
 
-        occurrence_pos = occurrence_finder(picked_word, user_letter_guess);
+        occurrence_pos = occurrence_finder(picked_word, user_guess);
 
         if (occurrence_pos.empty()) //Tests if occurrences of user's guessed letter have been found
         {
-            wrong_guesses.push_back(user_letter_guess);
+            wrong_guesses.push_back(user_guess);
             print_wrong_guesses(wrong_guesses);
             tries++;
         }
 
         else
-            letter_revealer(occurrence_pos, concealed_word, user_letter_guess);
+            reveal(concealed_word, user_guess, occurrence_pos);
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~ Tests whether the user has won or lost ~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
@@ -51,7 +51,7 @@ int main()
                 break;
 
             default:
-                won = win_checker(concealed_word, HIDING_CHAR);
+                won = check(concealed_word, HIDING_CHAR);
                 break;
         }
     }
@@ -69,4 +69,16 @@ int main()
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
+
 //std::cout << picked_word << "\n\n";
+
+/* if (user_letter_guess.length() > 1)
+        {
+            while (user_letter_guess.length() > 1)
+            {
+                std::cerr << "Input just one letter!";
+                std::cout << "Pick a letter: ";
+                std::cin >> user_letter_guess;
+            }
+
+        } */

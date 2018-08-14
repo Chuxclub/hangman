@@ -9,13 +9,16 @@
 void hangman_word::pick()
 {
     vector<string> dictionary;
-    fstream file("words_alpha.txt"); //Warning! Works only on this environment!
+    fstream file; //Warning! Works only on this environment!
+    file.open("words_alpha.txt");
     std::string words;
 
     while(file >> words)
     {
         dictionary.push_back(words);
     }
+
+    file.close();
 
     srand((unsigned int) time(nullptr));
     constexpr int TOTAL_OF_WORDS = 370099;

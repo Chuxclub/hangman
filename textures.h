@@ -10,6 +10,9 @@
 #include "termcolor.hpp"
 
 void main_title();
+void main_menu_title();
+void solo_title();
+void solo_end_title();
 void tries_title(int a);
 void won_title();
 void lost_title();

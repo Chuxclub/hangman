@@ -70,7 +70,6 @@ bool new_game()
                 output = true;
                 break;
             case 'n':
-                main_separator();
                 wrong_input = false;
                 output = false;
                 break;

@@ -6,9 +6,30 @@
 
 void main_title()
 {
-    std::cout << "\n" << "* ==================== ";
+    std::cout << "* ==================== ";
     std::cout << termcolor::cyan << "WELCOME TO HANGMAN GAME!" << termcolor::reset;
     std::cout << " ==================== *";
+}
+
+void main_menu_title()
+{
+    std::cout << "                             ";
+    std::cout << "< " << termcolor::green << "MAIN MENU" << termcolor::reset << " >";
+    std::cout << "                             ";
+}
+
+void solo_title()
+{
+    std::cout << "                             ";
+    std::cout << "< " << termcolor::green << "SOLO MODE" << termcolor::reset << " >";
+    std::cout << "                             ";
+}
+
+void solo_end_title()
+{
+    std::cout << "                             ";
+    std::cout << "< " << termcolor::green << "SOLO END" << termcolor::reset << "  >";
+    std::cout << "                             ";
 }
 
 void tries_title(int a)

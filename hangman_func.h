@@ -13,4 +13,6 @@ void print_wrong_guesses(vector <string> const& wrong_guesses);
 string test_validity(string &guess);
 //Tests if user_input is valid, meaning two conditions: 1 character, character is a small letter
 
+bool new_game();
+
 #endif //HANGMAN_HANGMAN_FUNC_H

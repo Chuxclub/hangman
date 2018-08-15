@@ -9,14 +9,14 @@ void TriesTitle(int a)
     if (a > 1)
     {
         std::cout << "\n\n\t" <<"<----------------------- ";
-        std::cout << termcolor::grey << a << " tries left" << termcolor::reset;
+        std::cout << termcolor::white << a << " tries left" << termcolor::reset;
         std::cout << " ----------------------->";
     }
 
     else
     {
         std::cout << "\n\n\t" <<"<------------------------ ";
-        std::cout << termcolor::grey << a << " try left" << termcolor::reset;
+        std::cout << termcolor::white << a << " try left" << termcolor::reset;
         std::cout << " ------------------------>";
     }
 }
@@ -72,15 +72,6 @@ void HangmanDraw(int a)
             std::cout << "\t" << "\u22A5" << "\n";
             break;
 
-        case 5:
-            std::cout << "\t" << "------" << "\n";
-            std::cout << "\t" << "|    |" << "\n";
-            std::cout << "\t" << "|    O" << "\n";
-            std::cout << "\t" << "|   /|\\" << "\n";
-            std::cout << "\t" << "|   / \\" << "\n";
-            std::cout << "\t" << "\u22A5" << "\n";
-            break;
-
         default:
             std::cout << termcolor::red << "\t" << "Something went wrong, no hangman can be produced" << termcolor::reset;
     }
@@ -91,4 +82,14 @@ void HangmanSaved()
     std::cout << "\t" << "\\O/" << "\n";
     std::cout << "\t" << " |" << "\n";
     std::cout << "\t" << "/ \\" << "\n";
+}
+
+void HangmanDead()
+{
+    std::cout << "\t" << "------" << "\n";
+    std::cout << "\t" << "|    |" << "\n";
+    std::cout << "\t" << "|    O" << "\n";
+    std::cout << "\t" << "|   /|\\" << "\n";
+    std::cout << "\t" << "|   / \\" << "\n";
+    std::cout << "\t" << "\u22A5" << "\n";
 }

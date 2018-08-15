@@ -12,5 +12,6 @@
 void TriesTitle(int a);
 void HangmanDraw(int a);
 void HangmanSaved();
+void HangmanDead();
 
 #endif //HANGMAN_TEXTURES_H

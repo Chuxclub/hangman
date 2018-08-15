@@ -9,12 +9,13 @@ int main()
     unsigned short int user_selection = 0;
     bool stay = true, valid_input;
 
+    std::cout << "\n     ";
     MainTitleSeparator(20, "WELCOME TO HANGMAN GAME!", "cyan");
     std::cout << "\n\n";
 
     while(stay)
     {
-        std::cout << "\t\t\t\t\t\t\t  ";
+        std::cout << "\t\t\t\t  ";
         MinorTitle("MAIN MENU", "green");
         std::cout << "\n\n";
 
@@ -45,8 +46,9 @@ int main()
                     case 2:
                         valid_input = true;
                         stay = false;
-                        std::cout << "\n";
+                        std::cout << "\n     ";
                         MainSeparator(66);
+                        std::cout << "\n\n";
                         break;
 
                     default:

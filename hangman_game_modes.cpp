@@ -25,7 +25,7 @@ void solo()
         word.pick();
         word.conceal();
 
-        std::cout << "\n\n\t\t\t\t\t\t\t  ";
+        std::cout << "\n\n\t\t\t\t  ";
         MinorTitle("SOLO MODE", "green");
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~ If user has neither won nor lost, then loops ~~~~~~~~~~~~~~~~~~~~~~~~~ //
@@ -40,7 +40,11 @@ void solo()
 
             std::cout << "\t" << "Pick a letter: ";
             std::cin >> user_guess;
-            TestValidity(user_guess);
+
+            if(user_guess == "exit")
+                break;
+            else
+                TestValidity(user_guess);
 
             word.find_occurrences(user_guess);
 
@@ -78,18 +82,19 @@ void solo()
 
         if(won)
         {
-            SubTitleSeparator(23, "YOU SAVED HANGMAN", "green");
+            std::cout << "\n\t";
+            SubTitleSeparator(21, "YOU SAVED HANGMAN", "green");
             std::cout << "\n";
 
             HangmanSaved();
 
             std::cout << "\n\t" << "The hidden word is indeed: " << word.get_picked() << " !" << "\n";
             std::cout << "\n\t";
-            SubSeparator(66);
+            SubSeparator(62);
 
             player_continues = NewGame();
 
-            std::cout << "\n\t\t\t\t\t\t\t  ";
+            std::cout << "\n\t\t\t\t ";
             MinorTitle("SOLO ENDS", "green");
             std::cout << "\n\n";
         }
@@ -98,18 +103,18 @@ void solo()
         else
         {
             std::cout << "\n\t";
-            SubTitleSeparator(23, "HANGMAN IS DEAD", "red");
+            SubTitleSeparator(21, "HANGMAN IS DEAD", "red");
             std::cout << "\n\n";
 
-            HangmanDraw(tries);
+            HangmanDead();
 
             std::cout << "\n\t" << "The hidden word was: " << word.get_picked() << " !" << "\n";
             std::cout << "\n\t";
-            SubSeparator(63);
+            SubSeparator(60);
 
             player_continues = NewGame();
 
-            std::cout << "\n\t\t\t\t\t\t\t  ";
+            std::cout << "\n\t\t\t\t  ";
             MinorTitle("SOLO ENDS", "green");
             std::cout << "\n\n";
         }

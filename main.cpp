@@ -1,39 +1,36 @@
-#include <iostream>
 #include "std_lib_facilities.h"
-#include "textures.h"
 #include "hangman_game_modes.h"
+#include "TSS.h"
 
 /* ---------------------------------------------- HANGMAN GAME SOLO ---------------------------------------------- */
 
 int main()
 {
-    int user_selection = 0;
+    unsigned short int user_selection = 0;
     bool stay = true, valid_input;
 
-    main_title();
+    MainTitleSeparator(20, "WELCOME TO HANGMAN GAME!", "cyan");
     std::cout << "\n\n";
 
     while(stay)
     {
-        main_menu_title();
+        std::cout << "\t\t\t\t\t\t\t  ";
+        MinorTitle("MAIN MENU", "green");
         std::cout << "\n\n";
 
         do
         {
             std::cout << "\t" << "1. Solo mode" << "\n";
-            std::cout << "\t" << termcolor::red << "2. Versus mode" << termcolor::reset << "\n";
-            std::cout << "\t" << termcolor::red << "3. Options" << termcolor::reset << "\n";
-            std::cout << "\t" << "4. Exit" << "\n\n";
+            std::cout << "\t" << "2. Exit" << "\n\n";
             std::cout << "\t" << "Your selection: ";
             std::cin >> user_selection;
 
-            if(!cin || user_selection < 1 || user_selection > 4)
+            if(!cin || user_selection < 1 || user_selection > 2)
             {
+                valid_input = false;
                 cin.clear();
                 cin.ignore(1000, '\n');
-                std::cout << "\t" << termcolor::red << "Wrong input! Press 1, 2, 3 or 4!";
-                std::cout << termcolor::reset <<"\n\n";
-                valid_input = false;
+                std::cout << "\t" << termcolor::red << "Wrong input! Press 1 or 2!" << termcolor::reset <<"\n\n";
             }
 
             else
@@ -46,35 +43,20 @@ int main()
                         break;
 
                     case 2:
-                        valid_input = false;
-                        std::cout << "\t" << termcolor::red << "Unavailable feature for the moment, WIP!";
-                        std::cout << termcolor::reset <<  "\n\n";
-                        break;
-
-                    case 3:
-                        valid_input = false;
-                        std::cout << "\t" << termcolor::red << "Unavailable feature for the moment, WIP!";
-                        std::cout << termcolor::reset <<  "\n\n";
-                        break;
-
-                    case 4:
                         valid_input = true;
                         stay = false;
                         std::cout << "\n";
-                        main_separator(66);
+                        MainSeparator(66);
                         break;
 
                     default:
                         valid_input = false;
-                        std::cout << "\t" << termcolor::red << "Wrong input! Press 1, 2, 3 or 4!";
-                        std::cout << termcolor::reset <<"\n\n";
+                        std::cout << "\t" << termcolor::red << "Wrong input! Press 1 or 2!" << termcolor::reset <<"\n\n";
                         break;
                 }
             }
 
-
         }while (!valid_input);
-
     }
 
     return 0;

@@ -2,37 +2,9 @@
 // Created by crex on 14/08/18.
 //
 
-#include "textures.h"
+#include "hangman_textures.h"
 
-void main_title()
-{
-    std::cout << "* ==================== ";
-    std::cout << termcolor::cyan << "WELCOME TO HANGMAN GAME!" << termcolor::reset;
-    std::cout << " ==================== *";
-}
-
-void main_menu_title()
-{
-    std::cout << "                             ";
-    std::cout << "< " << termcolor::green << "MAIN MENU" << termcolor::reset << " >";
-    std::cout << "                             ";
-}
-
-void solo_title()
-{
-    std::cout << "                             ";
-    std::cout << "< " << termcolor::green << "SOLO MODE" << termcolor::reset << " >";
-    std::cout << "                             ";
-}
-
-void solo_end_title()
-{
-    std::cout << "                             ";
-    std::cout << "< " << termcolor::green << "SOLO END" << termcolor::reset << "  >";
-    std::cout << "                             ";
-}
-
-void tries_title(int a)
+void TriesTitle(int a)
 {
     if (a > 1)
     {
@@ -43,47 +15,13 @@ void tries_title(int a)
 
     else
     {
-        std::cout << "\n\n\t" <<"<----------------------- ";
+        std::cout << "\n\n\t" <<"<------------------------ ";
         std::cout << termcolor::grey << a << " try left" << termcolor::reset;
-        std::cout << " ----------------------->";
+        std::cout << " ------------------------>";
     }
 }
 
-void won_title()
-{
-    std::cout << "\n\t" << "<----------------------- ";
-    std::cout << termcolor::green << "YOU SAVED HANGMAN!" << termcolor::reset;
-    std::cout << " ----------------------->" << "\n";
-}
-
-void lost_title()
-{
-    std::cout << "\n\t" << "<----------------------- ";
-    std::cout << termcolor::red << "HANGMAN IS DEAD" << termcolor::reset;
-    std::cout << " ----------------------->" << "\n";
-}
-
-void sub_separator(int a)
-{
-    std::cout << "<";
-
-    for(int i = 0; i < a; i++)
-        std::cout << "-";
-
-    std::cout << ">";
-}
-
-void main_separator(int a)
-{
-    std::cout << "* ";
-
-    for(int i = 0; i < a; i++)
-        std::cout << "=";
-
-    std::cout << " *";
-}
-
-void hangman_draw(int a)
+void HangmanDraw(int a)
 {
     switch(a)
     {
@@ -148,7 +86,7 @@ void hangman_draw(int a)
     }
 }
 
-void hangman_saved()
+void HangmanSaved()
 {
     std::cout << "\t" << "\\O/" << "\n";
     std::cout << "\t" << " |" << "\n";

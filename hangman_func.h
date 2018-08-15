@@ -7,12 +7,12 @@
 #include <iostream>
 #include "std_lib_facilities.h"
 
-void print_wrong_guesses(vector <string> const& wrong_guesses);
+void PrintWrongGuesses(vector <string> const& wrong_guesses);
 //Prints all wrong guesses already done by user
 
-string test_validity(string &guess);
+string TestValidity(string &guess);
 //Tests if user_input is valid, meaning two conditions: 1 character, character is a small letter
 
-bool new_game();
+bool NewGame();
 
 #endif //HANGMAN_HANGMAN_FUNC_H

@@ -2,12 +2,12 @@
 // Created by crex on 14/08/18.
 //
 
-#include <iostream>
 #include "std_lib_facilities.h"
 #include "hangman_func.h"
 #include "hangman_word.h"
-#include "textures.h"
+#include "hangman_textures.h"
 #include "hangman_game_modes.h"
+#include "TSS.h"
 
 void solo()
 {
@@ -25,22 +25,22 @@ void solo()
         word.pick();
         word.conceal();
 
-        std::cout << "\n\n";
-        solo_title();
+        std::cout << "\n\n\t\t\t\t\t\t\t  ";
+        MinorTitle("SOLO MODE", "green");
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~ If user has neither won nor lost, then loops ~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
         while(!won && !lost) //If player has won, condition is false, same goes if he has lost
         {
-            tries_title(MAX_TRIES - tries);
+            TriesTitle(MAX_TRIES - tries);
             std::cout << "\n\n";
-            hangman_draw(tries);
+            HangmanDraw(tries);
 
             std::cout << "\n\n\t" << "Hidden word: " << word.get_concealed() << "\n\n";
 
             std::cout << "\t" << "Pick a letter: ";
             std::cin >> user_guess;
-            test_validity(user_guess);
+            TestValidity(user_guess);
 
             word.find_occurrences(user_guess);
 
@@ -48,7 +48,7 @@ void solo()
             {
                 wrong_guesses.push_back(user_guess);
                 std::cout << "\t";
-                print_wrong_guesses(wrong_guesses);
+                PrintWrongGuesses(wrong_guesses);
                 tries++;
             }
 
@@ -78,34 +78,39 @@ void solo()
 
         if(won)
         {
-            won_title();
+            SubTitleSeparator(23, "YOU SAVED HANGMAN", "green");
             std::cout << "\n";
-            hangman_saved();
+
+            HangmanSaved();
+
             std::cout << "\n\t" << "The hidden word is indeed: " << word.get_picked() << " !" << "\n";
             std::cout << "\n\t";
-            sub_separator(66);
+            SubSeparator(66);
 
-            player_continues = new_game();
+            player_continues = NewGame();
 
-            std::cout << "\n";
-            solo_end_title();
+            std::cout << "\n\t\t\t\t\t\t\t  ";
+            MinorTitle("SOLO ENDS", "green");
             std::cout << "\n\n";
         }
 
 
         else
         {
-            lost_title();
-            std::cout << "\n";
-            hangman_draw(tries);
+            std::cout << "\n\t";
+            SubTitleSeparator(23, "HANGMAN IS DEAD", "red");
+            std::cout << "\n\n";
+
+            HangmanDraw(tries);
+
             std::cout << "\n\t" << "The hidden word was: " << word.get_picked() << " !" << "\n";
             std::cout << "\n\t";
-            sub_separator(63);
+            SubSeparator(63);
 
-            player_continues = new_game();
+            player_continues = NewGame();
 
-            std::cout << "\n";
-            solo_end_title();
+            std::cout << "\n\t\t\t\t\t\t\t  ";
+            MinorTitle("SOLO ENDS", "green");
             std::cout << "\n\n";
         }
 

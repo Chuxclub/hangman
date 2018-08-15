@@ -6,9 +6,8 @@
 #include "std_lib_facilities.h"
 #include "hangman_func.h"
 #include "termcolor.hpp"
-#include "textures.h"
 
-void print_wrong_guesses(vector <string> const& wrong_guesses)
+void PrintWrongGuesses(vector <string> const& wrong_guesses)
 {
     std::cout << termcolor::yellow << "Wrong letters: " << termcolor::reset;
 
@@ -24,7 +23,7 @@ void print_wrong_guesses(vector <string> const& wrong_guesses)
     std::cout << "\n\n";
 }
 
-string test_validity(string &guess)
+string TestValidity(string &guess)
 {
     constexpr int GUESS_MAX_SIZE = 1, A_ASCII_CODE = 97, Z_ASCII_CODE = 122;
     //Won't work in many other languages though...
@@ -51,7 +50,7 @@ string test_validity(string &guess)
     return guess;
 }
 
-bool new_game()
+bool NewGame()
 {
     char choice;
     bool output = false, wrong_input;

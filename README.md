@@ -1,6 +1,4 @@
 # hangman
-Hangman game in Bash
-
 Hangman game playable in Bash shell, this is pretty much it.
 
 This project works but I'm new to programming and hence lack lots of concepts so if you have a look in the source code you'll probably find that's it's a genuine mess despite my efforts to clean it.

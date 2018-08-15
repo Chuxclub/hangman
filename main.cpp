@@ -8,7 +8,7 @@
 int main()
 {
     int user_selection = 0;
-    bool stay = true, valid_input = true;
+    bool stay = true, valid_input;
 
     main_title();
     std::cout << "\n\n";
@@ -27,10 +27,10 @@ int main()
             std::cout << "\t" << "Your selection: ";
             std::cin >> user_selection;
 
-            if(!cin)
+            if(!cin || user_selection < 1 || user_selection > 4)
             {
                 cin.clear();
-                cin.ignore();
+                cin.ignore(1000, '\n');
                 std::cout << "\t" << termcolor::red << "Wrong input! Press 1, 2, 3 or 4!";
                 std::cout << termcolor::reset <<"\n\n";
                 valid_input = false;
@@ -60,7 +60,8 @@ int main()
                     case 4:
                         valid_input = true;
                         stay = false;
-                        main_separator();
+                        std::cout << "\n";
+                        main_separator(66);
                         break;
 
                     default:
@@ -75,7 +76,6 @@ int main()
         }while (!valid_input);
 
     }
-
 
     return 0;
 }

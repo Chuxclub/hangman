@@ -82,7 +82,8 @@ void solo()
             std::cout << "\n";
             hangman_saved();
             std::cout << "\n\t" << "The hidden word is indeed: " << word.get_picked() << " !" << "\n";
-            sub_separator();
+            std::cout << "\n\t";
+            sub_separator(66);
 
             player_continues = new_game();
 
@@ -98,7 +99,8 @@ void solo()
             std::cout << "\n";
             hangman_draw(tries);
             std::cout << "\n\t" << "The hidden word was: " << word.get_picked() << " !" << "\n";
-            sub_separator();
+            std::cout << "\n\t";
+            sub_separator(63);
 
             player_continues = new_game();
 
@@ -108,6 +110,8 @@ void solo()
         }
 
     } while(player_continues);
+
+    std::cout << "\n";
 }
 
 

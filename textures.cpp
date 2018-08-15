@@ -63,14 +63,24 @@ void lost_title()
     std::cout << " ----------------------->" << "\n";
 }
 
-void sub_separator()
+void sub_separator(int a)
 {
-    std::cout << "\n\t" << "<-------------------------------------------------------->";
+    std::cout << "<";
+
+    for(int i = 0; i < a; i++)
+        std::cout << "-";
+
+    std::cout << ">";
 }
 
-void main_separator()
+void main_separator(int a)
 {
-    std::cout << "\n" << "* ================================================================== *" << "\n";
+    std::cout << "* ";
+
+    for(int i = 0; i < a; i++)
+        std::cout << "=";
+
+    std::cout << " *";
 }
 
 void hangman_draw(int a)

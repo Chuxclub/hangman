@@ -16,8 +16,8 @@ void solo_end_title();
 void tries_title(int a);
 void won_title();
 void lost_title();
-void sub_separator();
-void main_separator();
+void sub_separator(int a);
+void main_separator(int a);
 void hangman_draw(int a);
 void hangman_saved();
 

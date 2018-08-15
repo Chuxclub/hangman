@@ -65,7 +65,6 @@ bool new_game()
         switch(choice)
         {
             case 'y':
-                std::cout << "\n\n";
                 wrong_input = false;
                 output = true;
                 break;
